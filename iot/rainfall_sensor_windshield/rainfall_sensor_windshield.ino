@@ -16,23 +16,27 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  
-while(!Serial.available())
-delay(10);
-
-if(Serial.available()>0)
-{
-  while(digitalRead(waterPin)==0){
+ 
+  if(digitalRead(waterPin)==0){
     Serial.println("its raining");
       mad.write(0);
-        delay(500);
-        mad.write(180);
-          delay(500);
+
+
+        for(int i=0;i<=180;i++){
+          mad.write(i);
+          delay(50);
+        }
+        for(int i=180;i>=0;i--){
+          mad.write(i);
+          delay(50);
+        }
+  }
+  else{
+    Serial.println("Rain stopped");
+     mad.write(0);
   }
  
-}
-
-  
+ 
   
  
 
